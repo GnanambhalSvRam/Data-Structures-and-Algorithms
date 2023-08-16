@@ -1,6 +1,32 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+//Single Traversal Approach
+int secondLargestElementOptimized(vector<int> vec)
+{
+    int first, second, n = vec.size();
+    first = vec[0];
+    second = INT_MIN;
+    
+    for(int i=1;i<n;i++)
+    {
+        if(vec[i]>first)
+        {
+            second = first;
+            first = vec[i];
+            continue;
+        }
+        
+        if(vec[i]>second && vec[i] != first)
+            second = vec[i];
+    }
+    
+    if(second == INT_MIN)
+        return -1;
+    return second;
+}
+
+//Dual Traversal Approach
 int secondLargestElement(vector<int> vec)
 {
     int max = vec[0];
