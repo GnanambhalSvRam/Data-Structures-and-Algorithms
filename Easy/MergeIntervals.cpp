@@ -1,43 +1,42 @@
 //Merge Array Intervals
-
+//Time Complexity: O(nlogn)
 #include<bits/stdc++.h>
 using namespace std;
 
-// void sort(&vector<vector<int>> intervals)
-// {
-    
-// }
-
-vector<vector<int>> mergeIntervals(vector<vector<int>> intervals)
+static bool sortFunc(const vector<int> &p1, const vector<int> &p2)
 {
-    //sort(intervals);
+    return p1[0] < p2[0];
+}
+
+vector<vector<int>> merge(vector<vector<int>>& intervals) 
+{
+    sort(intervals.begin(), intervals.end(), sortFunc);
     int start = intervals[0][0], end = intervals[0][1];
-    vector<vector<int>> result;
-    
+
+    vector<vector<int>> res;
+    vector<int> pair;
+
     for(int i=1;i<intervals.size();i++)
     {
-        if(intervals[i][0] > end)
+        if(intervals[i][0] <= end)
         {
-            vector<int> pair = {start,end};
-            result.push_back(pair);
-            cout<<"\nPushing back ["<<start<<","<<end<<"]";
-            start = intervals[i][0];
-            end = intervals[i][1];
-            cout<<"\nCurrent start = "<<start<<", end = "<<end;
-            continue;
+                if(intervals[i][1] < end)
+                    continue;
+                else
+                    end = intervals[i][1];
         }
+            
+        else
+        {
+                res.push_back({start,end});
+                start = intervals[i][0];
+                end = intervals[i][1];
+        }
+    }
         
-        if(intervals[i][0] <= end && intervals[i][1] > end)
-            end = intervals[i][1];
-    }
-    
-    result.push_back({start,end});
-    
-    for(int i=0;i<result.size();i++)
-    {
-        cout<<"\n\n"<<result[i][0]<<","<<result[i][1];
-    }
-    return result;
+    res.push_back({start,end});
+
+    return res;
 }
 
 int main()
