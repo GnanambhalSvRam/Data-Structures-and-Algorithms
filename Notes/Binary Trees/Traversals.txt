@@ -1,0 +1,7 @@
+Depth First Search
+  - Inorder Traversal : Left Root Right
+  - Preorder Traversal : Root Left Right
+  - Postorder Traversal : Left Right Root
+
+Breadth First Search
+  - Level Order Traversal
