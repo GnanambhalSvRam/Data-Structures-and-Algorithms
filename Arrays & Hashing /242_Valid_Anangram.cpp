@@ -35,4 +35,22 @@ public:
         return true;
 
     }
+
+    //Optimal Solution
+    bool isAnagram(string s, string t)
+    {
+        int hashmap[128] = {0}; //table to store ascii values
+        
+        for(int i=0; i<s.length(); i++)
+            hashmap[s[i]] += 1;
+            
+        for(int i=0; i<t.length(); i++)
+            hashmap[t[i]] -= 1;
+            
+        for(int i=0; i<128; i++)
+            if(hashmap[i] != 0)
+                return false;
+                
+        return true;
+    }
 };
