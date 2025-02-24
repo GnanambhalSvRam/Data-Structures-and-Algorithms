@@ -46,3 +46,29 @@ class Solution:
             result = result + "".join(row)
 
         return result
+
+    #Optimized/Simplified
+    def convert_optimized(self, s: str, numRows: int) -> str:
+    
+            if numRows == 1 or len(s) <= 1:
+                return s
+            
+            res = [[] for _ in range(numRows)]
+            direction = 1
+            index = 0
+    
+            for i in range(len(s)):
+                
+                if index == 0:
+                    direction = 1
+                elif index == numRows - 1:
+                    direction = -1
+    
+                res[index].append(s[i])
+                index = index + direction
+    
+            result = ""
+            for row in res:
+                result = result + "".join(row)
+    
+            return result
