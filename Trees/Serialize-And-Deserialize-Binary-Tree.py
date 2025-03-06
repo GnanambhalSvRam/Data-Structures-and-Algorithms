@@ -27,14 +27,12 @@ class Codec:
                 array.append('N')
             else:
                 array.append(str(node.val))
-            array.append('.')
 
             if node:
                 queue.append(node.left)
                 queue.append(node.right)
 
-        array.pop()
-        serialized = "".join(array)
+        serialized = ".".join(array)
         return serialized
 
     def deserialize(self, data):
@@ -50,7 +48,10 @@ class Codec:
         array = data.split('.')
 
         queue = deque()
-        val = array.pop(0)
+        i = 0
+
+        val = array[i]
+        i+=1
         root = TreeNode(int(val))
         queue.append(root)
 
@@ -58,7 +59,8 @@ class Codec:
             node = queue.popleft()
 
             leftNode, rightNode = None, None
-            left, right = array.pop(0), array.pop(0)
+            left, right = array[i], array[i+1]
+            i += 2
 
             if left != 'N':
                 leftNode = TreeNode(int(left))
